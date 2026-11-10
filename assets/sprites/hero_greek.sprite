@@ -1,0 +1,110 @@
+title "Greek Hero of Olympus"
+type sprite
+size 64x64
+fps 10
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+ramp marble_tunic #8A8E9E #C8CDD9 #EEF2FA #FFFFFF
+ramp bronze_armor #4A2810 #8C5220 #D48B3B #FFE08A
+ramp spartan_red  #4A1228 #8F1E38 #D9384A #FF8A73
+ramp divine_gold  #5C3409 #A86614 #E8AD28 #FFF294
+
+part shadow ramp=obsidian z=-10 pivot=32,56
+  box 32,56 12,3 r=2.0 step=0
+
+part cape ramp=spartan_red z=-5 pivot=32,26
+  poly 22,24 42,24 46,48 18,48 r=2.0
+
+part leg_l ramp=flesh z=-2 pivot=27,42
+  capsule 27,42 26,53 r=3.2
+  capsule 27,47 26,54 r=3.4 ramp=bronze_armor
+
+part leg_r ramp=flesh z=-1 pivot=37,42
+  capsule 37,42 38,53 r=3.2
+  capsule 37,47 38,54 r=3.4 ramp=bronze_armor
+
+part torso ramp=marble_tunic z=0 pivot=32,34 dither=bayer2
+  box 32,38 9,8 r=2.5
+  box 32,31 10,7 r=3.0 ramp=bronze_armor
+  box 32,39 10,2.5 r=1.0 ramp=divine_gold
+  line 25,42 25,46 thick=2.0 ramp=bronze_armor
+  line 29,42 29,46 thick=2.0 ramp=bronze_armor
+  line 35,42 35,46 thick=2.0 ramp=bronze_armor
+  line 39,42 39,46 thick=2.0 ramp=bronze_armor
+
+part head ramp=flesh z=3 pivot=32,20
+  circle 32,19 r=7.5
+  capsule 25,14 39,14 r=2.2 ramp=divine_gold
+  poly 24,15 32,10 40,15 38,18 26,18 r=1.5 ramp=obsidian
+  pixel 29,18 w=2 h=3 step=0 ramp=obsidian
+  pixel 34,18 w=2 h=3 step=0 ramp=obsidian
+  pixel 29,18 w=1 h=1 step=3 ramp=marble_tunic
+  pixel 34,18 w=1 h=1 step=3 ramp=marble_tunic
+
+part arm_l ramp=flesh z=2 pivot=22,29
+  capsule 22,29 18,37 r=3.0
+  capsule 19,33 17,37 r=3.1 ramp=bronze_armor
+
+part arm_r ramp=flesh z=4 pivot=42,29
+  capsule 42,29 47,36 r=3.0
+  capsule 45,32 47,36 r=3.1 ramp=bronze_armor
+
+part bow ramp=divine_gold z=6 pivot=48,33
+  capsule 46,20 52,33 r=2.0
+  capsule 52,33 46,46 r=2.0
+  line 45,21 45,45 thick=1.2 ramp=marble_tunic
+  line 43,33 55,33 thick=2.0 ramp=divine_gold
+
+part sword ramp=steel z=7 hidden=true pivot=45,34
+  capsule 45,34 57,22 r=2.4
+  box 45,34 4.0,1.8 r=0.8 ramp=divine_gold
+  capsule 42,37 45,34 r=1.8 ramp=spartan_red
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose torso dy=sin(1.0) squash=sin(0.05)
+  pose head dy=sin(1.0)
+  pose cape rot=sin(3.0)
+  pose arm_l dy=sin(1.0)
+  pose arm_r dy=sin(1.0)
+  pose bow dy=sin(1.0)
+
+tag run frames=4 duration=90ms loop=loop
+  pose torso dy=abs_sin(2.0) rot=sin(4.0)
+  pose head dy=abs_sin(2.0)
+  pose cape rot=sin(8.0) dy=abs_sin(1.5)
+  pose leg_l dy=sin(4.0) dx=cos(2.0) rot=sin(18.0)
+  pose leg_r dy=cos(4.0) dx=sin(2.0) rot=cos(18.0)
+  pose arm_l dy=cos(2.0) rot=cos(14.0)
+  pose arm_r dy=sin(2.0) rot=sin(10.0)
+  pose bow dy=sin(2.0) rot=sin(8.0)
+
+tag bow_attack frames=4 duration=75ms loop=once
+  pose bow visible=true f=0..3 dx=0->3
+  pose sword visible=false f=0..3
+  pose arm_r f=0..1 dx=0->-3
+  pose arm_r f=2..3 dx=2->0
+  pose torso f=0..1 rot=0->-5
+  pose torso f=2..3 rot=4->0
+
+tag sword_attack frames=4 duration=75ms loop=once
+  pose bow visible=false f=0..3
+  pose sword visible=true f=0..0 rot=-55 dx=-2 dy=-4
+  pose sword visible=true f=1..2 rot=-20->75 dx=3 dy=2 scale=1.18 ease=out_quad
+  pose sword visible=true f=3..3 rot=45->0 dx=0 dy=0
+  pose arm_r f=0..0 rot=-35
+  pose arm_r f=1..2 rot=45 ease=out_quad
+  pose arm_r f=3..3 rot=10->0
+  pose torso f=1..2 rot=10 squash=-0.08
+
+tag hit frames=2 duration=90ms loop=once
+  pose torso dx=-3->0 squash=-0.12->0.0
+  pose head dx=-4->0 rot=-10->0
+
+tag death frames=4 duration=110ms loop=once
+  pose torso f=0..3 dy=0->12 rot=0->75
+  pose head f=0..3 dy=0->14 dx=0->8 rot=0->80
+  pose cape f=0..3 dy=0->10
+  pose leg_l f=0..3 dy=0->8 rot=0->45
+  pose leg_r f=0..3 dy=0->8 rot=0->60

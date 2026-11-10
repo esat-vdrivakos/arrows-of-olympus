@@ -1,0 +1,89 @@
+title "Titan Cronus - Lord of Time"
+type sprite
+size 112x112
+fps 10
+palette bloodmoon
+outline #0A0812
+light -0.5,-0.7
+
+ramp titan_obsidian #14111F #28243D #474166 #78719E
+ramp chronos_gold   #5C3409 #A86614 #E8AD28 #FFF294
+ramp crimson_flame  #4A1228 #8F1E38 #D9384A #FF8A73
+ramp adamant_blade  #1D1B5E #2C5CC9 #42B6F5 #C7F9FF
+
+part shadow ramp=obsidian z=-10 pivot=56,98
+  box 56,98 28,6 r=3.0 step=0
+
+part time_wheel ramp=chronos_gold z=-8 pivot=56,46
+  ring 56,46 r=34.0 thick=3.2
+  ring 56,46 r=27.0 thick=1.8 ramp=crimson_flame
+  line 56,10 56,82 thick=2.0 ramp=chronos_gold
+  line 20,46 92,46 thick=2.0 ramp=chronos_gold
+
+part mantle ramp=crimson_flame z=-5 pivot=56,42
+  poly 30,36 82,36 92,88 20,88 r=4.0
+
+part leg_l ramp=titan_obsidian z=-2 pivot=44,72
+  capsule 44,72 42,93 r=6.5
+  box 42,86 6.5,5.0 r=2.0 ramp=chronos_gold
+
+part leg_r ramp=titan_obsidian z=-1 pivot=68,72
+  capsule 68,72 70,93 r=6.5
+  box 70,86 6.5,5.0 r=2.0 ramp=chronos_gold
+
+part torso ramp=titan_obsidian z=0 pivot=56,56 dither=bayer2
+  box 56,54 21.0,17.0 r=5.0
+  box 56,72 19.0,6.5 r=2.5 ramp=chronos_gold
+  poly 48,44 64,44 56,54 ramp=chronos_gold
+  poly 56,54 48,64 64,64 ramp=adamant_blade
+
+part shoulders ramp=chronos_gold z=2 pivot=56,40
+  circle 30,42 r=10.5
+  circle 82,42 r=10.5
+  poly 20,35 30,24 36,38 ramp=crimson_flame
+  poly 92,35 82,24 76,38 ramp=crimson_flame
+
+part head ramp=titan_obsidian z=4 pivot=56,27
+  poly 38,8 46,20 56,4 66,20 74,8 70,24 42,24 ramp=chronos_gold
+  circle 56,28 r=13.0
+  poly 44,32 68,32 56,45 r=2.0 ramp=obsidian
+  pixel 49,26 w=5 h=3 step=3 ramp=crimson_flame
+  pixel 59,26 w=5 h=3 step=3 ramp=crimson_flame
+
+part sickle ramp=adamant_blade z=7 pivot=82,56
+  capsule 72,86 88,22 r=3.5 ramp=chronos_gold
+  capsule 88,22 64,12 r=4.5 ramp=adamant_blade
+  capsule 64,12 46,24 r=3.5 ramp=adamant_blade
+  circle 86,26 r=4.5 ramp=crimson_flame
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose torso dy=sin(2.0) squash=sin(0.05)
+  pose head dy=sin(2.0)
+  pose time_wheel rot=sin(12.0)
+  pose sickle dy=sin(2.5) rot=sin(5.0)
+
+tag move frames=4 duration=100ms loop=loop
+  pose torso dy=abs_sin(3.0)
+  pose head dy=abs_sin(3.0)
+  pose leg_l dy=sin(6.0) rot=sin(16.0)
+  pose leg_r dy=cos(6.0) rot=cos(16.0)
+  pose time_wheel rot=0->45
+  pose sickle rot=sin(14.0)
+
+tag cleave frames=4 duration=85ms loop=once
+  pose sickle f=0..1 rot=0->-45 dx=0->-6
+  pose sickle f=2..3 rot=75->0 dx=8->0 scale=1.20 ease=out_quad
+  pose torso f=1..2 rot=12 squash=-0.08
+  pose time_wheel f=0..3 rot=0->90
+
+tag summon frames=4 duration=110ms loop=once
+  pose time_wheel f=0..3 squash=0.0->0.16 rot=0->90
+  pose shoulders f=0..2 dy=0->-5
+  pose shoulders f=3..3 dy=0
+  pose head f=0..2 dy=0->-3
+
+tag death frames=4 duration=130ms loop=once
+  pose torso f=0..3 dy=0->22 rot=0->60
+  pose head f=0..3 dy=0->24 rot=0->70
+  pose sickle f=0..3 dy=0->20 rot=0->85
+  pose time_wheel f=0..3 scale=0.6

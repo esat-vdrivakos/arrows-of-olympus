@@ -1,0 +1,83 @@
+title "Greek Hoplite Warrior (Unshielded)"
+type sprite
+size 64x64
+fps 10
+palette ember
+outline #141020
+light -0.5,-0.7
+
+ramp bronze_plate #4A2810 #8C5220 #D48B3B #FFE08A
+ramp crimson_crest #4A1228 #8F1E38 #D9384A #FF8A73
+ramp iron_blade   #2A2E45 #546382 #8FA3C7 #DCE8FC
+
+part shadow ramp=obsidian z=-10 pivot=32,56
+  box 32,56 12,3 r=2.0 step=0
+
+part cape ramp=crimson_crest z=-5 pivot=32,26
+  poly 21,25 43,25 47,49 17,49 r=2.0
+
+part leg_l ramp=flesh z=-2 pivot=27,43
+  capsule 27,43 26,54 r=3.3
+  capsule 27,47 26,54 r=3.5 ramp=bronze_plate
+
+part leg_r ramp=flesh z=-1 pivot=37,43
+  capsule 37,43 38,54 r=3.3
+  capsule 37,47 38,54 r=3.5 ramp=bronze_plate
+
+part cuirass ramp=bronze_plate z=0 pivot=32,34 dither=bayer2
+  box 32,33 10.5,8.5 r=3.0
+  box 32,42 10.0,4.0 r=1.5 ramp=leather
+  line 25,41 25,47 thick=2.2 ramp=bronze_plate
+  line 29,41 29,47 thick=2.2 ramp=bronze_plate
+  line 35,41 35,47 thick=2.2 ramp=bronze_plate
+  line 39,41 39,47 thick=2.2 ramp=bronze_plate
+
+part helmet ramp=bronze_plate z=4 pivot=32,18
+  poly 24,8 40,8 43,14 21,14 r=2.5 ramp=crimson_crest
+  circle 32,19 r=8.0
+  box 32,22 7.0,4.5 r=1.5
+  box 32,21 5.0,1.5 step=0 ramp=obsidian
+  pixel 28,20 w=3 h=2 step=3 ramp=crimson_crest
+  pixel 34,20 w=3 h=2 step=3 ramp=crimson_crest
+
+part arm_l ramp=flesh z=2 pivot=21,29
+  circle 21,27 r=4.2 ramp=bronze_plate
+  capsule 21,29 17,38 r=3.2
+
+part arm_r ramp=flesh z=5 pivot=43,29
+  circle 43,27 r=4.2 ramp=bronze_plate
+  capsule 43,29 48,37 r=3.2
+
+part xiphos ramp=iron_blade z=6 pivot=48,36
+  capsule 48,36 58,20 r=2.6
+  box 47,36 4.2,1.8 r=0.8 ramp=bronze_plate
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose cuirass dy=sin(1.0) squash=sin(0.05)
+  pose helmet dy=sin(1.0)
+  pose cape rot=sin(3.0)
+  pose xiphos rot=sin(4.0)
+
+tag run frames=4 duration=90ms loop=loop
+  pose cuirass dy=abs_sin(2.0) rot=sin(4.0)
+  pose helmet dy=abs_sin(2.0)
+  pose leg_l dy=sin(4.0) rot=sin(18.0)
+  pose leg_r dy=cos(4.0) rot=cos(18.0)
+  pose arm_r rot=sin(15.0)
+  pose xiphos rot=sin(18.0)
+
+tag attack frames=4 duration=80ms loop=once
+  pose arm_r f=0..1 rot=0->-35
+  pose arm_r f=2..3 rot=55->0 ease=out_quad
+  pose xiphos f=0..1 rot=0->-40
+  pose xiphos f=2..3 rot=65->0 scale=1.18 ease=out_quad
+  pose cuirass f=1..2 dx=0->4
+
+tag hit frames=2 duration=90ms loop=once
+  pose cuirass dx=-3->0 squash=-0.12->0.0
+  pose helmet dx=-4->0
+
+tag death frames=4 duration=110ms loop=once
+  pose cuirass f=0..3 dy=0->13 rot=0->70
+  pose helmet f=0..3 dy=0->15 dx=0->6 rot=0->75
+  pose xiphos f=0..3 dy=0->14 dx=0->8 rot=0->85

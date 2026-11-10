@@ -1,0 +1,87 @@
+title "Zeus Champion - Mid-Boss of Olympus"
+type sprite
+size 96x96
+fps 10
+palette neogeo
+outline #0A0A14
+light -0.5,-0.7
+
+ramp olympian_gold #5C3409 #A86614 #E8AD28 #FFF294
+ramp storm_azure   #1D1B5E #2C5CC9 #42B6F5 #C7F9FF
+ramp cloud_white   #7A8299 #B8C2D9 #E6EEFF #FFFFFF
+
+part shadow ramp=obsidian z=-10 pivot=48,84
+  box 48,84 22,5 r=3.0 step=0
+
+part halo ramp=storm_azure z=-8 pivot=48,38
+  ring 48,38 r=26.0 thick=2.8
+  poly 48,6 43,16 53,16 ramp=olympian_gold
+  poly 18,38 28,33 28,43 ramp=olympian_gold
+  poly 78,38 68,33 68,43 ramp=olympian_gold
+
+part cape ramp=storm_azure z=-5 pivot=48,36
+  poly 28,32 68,32 76,74 20,74 r=3.0
+
+part leg_l ramp=olympian_gold z=-2 pivot=39,62
+  capsule 39,62 37,80 r=5.2
+
+part leg_r ramp=olympian_gold z=-1 pivot=57,62
+  capsule 57,62 59,80 r=5.2
+
+part torso ramp=olympian_gold z=0 pivot=48,48 dither=bayer2
+  box 48,46 16.5,14.0 r=4.5
+  box 48,61 15.0,5.5 r=2.0 ramp=cloud_white
+  circle 48,45 r=6.0 ramp=storm_azure
+
+part pauldrons ramp=olympian_gold z=2 pivot=48,36
+  circle 27,37 r=8.0
+  circle 69,37 r=8.0
+  poly 20,31 27,24 31,34 ramp=storm_azure
+  poly 76,31 69,24 65,34 ramp=storm_azure
+
+part head ramp=olympian_gold z=4 pivot=48,25
+  poly 34,8 62,8 66,18 30,18 r=2.5 ramp=storm_azure
+  circle 48,25 r=11.0
+  box 48,27 8.5,3.0 step=0 ramp=obsidian
+  pixel 42,26 w=4 h=3 step=3 ramp=storm_azure
+  pixel 51,26 w=4 h=3 step=3 ramp=storm_azure
+
+part shield_l ramp=olympian_gold z=5 pivot=22,50
+  circle 22,50 r=13.0
+  circle 22,50 r=6.5 ramp=storm_azure
+
+part thunder_spear ramp=storm_azure z=6 pivot=72,48
+  capsule 66,74 82,14 r=3.2 ramp=olympian_gold
+  poly 77,20 88,4 85,24 ramp=storm_azure
+  poly 74,28 84,18 79,34 ramp=storm_azure
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose torso dy=sin(1.5) squash=sin(0.05)
+  pose head dy=sin(1.5)
+  pose halo rot=sin(8.0) squash=sin(0.06)
+  pose thunder_spear dy=sin(2.0)
+
+tag move frames=4 duration=95ms loop=loop
+  pose torso dy=abs_sin(2.5)
+  pose head dy=abs_sin(2.5)
+  pose leg_l dy=sin(5.0) rot=sin(18.0)
+  pose leg_r dy=cos(5.0) rot=cos(18.0)
+  pose halo rot=sin(12.0)
+  pose thunder_spear dy=sin(3.0) rot=sin(12.0)
+
+tag attack frames=4 duration=85ms loop=once
+  pose thunder_spear f=0..1 dx=0->-5 dy=0->4 rot=0->-20
+  pose thunder_spear f=2..3 dx=10->0 dy=-8->0 rot=25->0 scale=1.18 ease=out_quad
+  pose torso f=1..2 dx=0->5
+
+tag cast frames=4 duration=100ms loop=once
+  pose halo f=0..3 squash=0.0->0.18 rot=0->45
+  pose thunder_spear f=0..2 dy=0->-10
+  pose thunder_spear f=3..3 dy=0
+  pose pauldrons f=0..3 dy=0->-3
+
+tag death frames=4 duration=120ms loop=once
+  pose torso f=0..3 dy=0->18 rot=0->65
+  pose head f=0..3 dy=0->20 rot=0->75
+  pose halo f=0..3 scale=0.6
+  pose thunder_spear f=0..3 dy=0->18 rot=0->85

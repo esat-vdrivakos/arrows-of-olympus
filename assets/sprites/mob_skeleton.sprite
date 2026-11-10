@@ -1,0 +1,82 @@
+title "Skeleton Spartoi"
+type sprite
+size 64x64
+fps 10
+palette bloodmoon
+outline #141020
+light -0.5,-0.7
+
+ramp cursed_bone #4A3E42 #877875 #C7B8AC #F7F0E4
+ramp rust_bronze #3B2014 #6E3D22 #A86438 #E09B60
+ramp necromancy  #4A0E24 #9E193C #EB3858 #FF94A6
+
+part shadow ramp=obsidian z=-10 pivot=32,56
+  box 32,56 10,2.5 r=1.5 step=0
+
+part leg_l ramp=cursed_bone z=-2 pivot=28,43
+  capsule 28,43 26,54 r=2.2
+
+part leg_r ramp=cursed_bone z=-1 pivot=36,43
+  capsule 36,43 38,54 r=2.2
+
+part pelvis ramp=cursed_bone z=0 pivot=32,41
+  box 32,41 6.5,2.5 r=1.0
+  box 32,42 7.0,2.0 r=0.8 ramp=rust_bronze
+
+part ribs ramp=cursed_bone z=1 pivot=32,32
+  box 32,32 7.5,6.5 r=2.0
+  line 27,29 37,29 thick=1.6 ramp=obsidian
+  line 27,33 37,33 thick=1.6 ramp=obsidian
+  circle 32,32 r=2.5 ramp=necromancy
+
+part skull ramp=cursed_bone z=4 pivot=32,19
+  circle 32,18 r=7.0
+  box 32,23 4.5,3.0 r=1.0
+  poly 25,13 32,6 39,13 r=1.2 ramp=rust_bronze
+  poly 30,6 32,2 34,6 ramp=necromancy
+  pixel 28,17 w=3 h=3 step=3 ramp=necromancy
+  pixel 34,17 w=3 h=3 step=3 ramp=necromancy
+  pixel 31,20 w=2 h=2 step=0 ramp=obsidian
+
+part arm_l ramp=cursed_bone z=2 pivot=23,29
+  capsule 23,29 19,38 r=2.1
+  circle 19,39 r=3.5 ramp=rust_bronze
+
+part arm_r ramp=cursed_bone z=5 pivot=41,29
+  capsule 41,29 46,37 r=2.1
+
+part kopis ramp=steel z=6 pivot=46,36
+  capsule 46,36 55,23 r=2.2
+  capsule 52,26 57,20 r=2.5
+  box 45,37 3.0,1.5 ramp=rust_bronze
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose ribs dy=sin(1.2)
+  pose skull dy=sin(1.5) rot=sin(3.0)
+  pose arm_r rot=sin(5.0)
+  pose kopis rot=sin(6.0)
+
+tag run frames=4 duration=85ms loop=loop
+  pose ribs dy=abs_sin(2.0) rot=sin(5.0)
+  pose skull dy=abs_sin(2.5) rot=cos(4.0)
+  pose leg_l dy=sin(4.0) rot=sin(22.0)
+  pose leg_r dy=cos(4.0) rot=cos(22.0)
+  pose arm_l rot=cos(15.0)
+  pose arm_r rot=sin(18.0)
+  pose kopis rot=sin(20.0) dy=sin(2.0)
+
+tag attack frames=4 duration=80ms loop=once
+  pose arm_r f=0..1 rot=0->-40
+  pose arm_r f=2..3 rot=55->0 ease=out_quad
+  pose kopis f=0..1 rot=0->-45
+  pose kopis f=2..3 rot=65->0 scale=1.15 ease=out_quad
+  pose ribs f=1..2 dx=0->3
+
+tag hit frames=2 duration=90ms loop=once
+  pose ribs dx=-4->0 squash=-0.15->0.0
+  pose skull dx=-5->0 rot=-14->0
+
+tag death frames=4 duration=100ms loop=once
+  pose skull f=0..3 dy=0->18 dx=0->-8 rot=0->-65
+  pose ribs f=0..3 dy=0->14 rot=0->50
+  pose kopis f=0..3 dy=0->16 dx=0->6 rot=0->85

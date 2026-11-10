@@ -1,0 +1,14 @@
+title "Ambrosia XP Gem"
+type sprite
+size 24x24
+fps 10
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+part gem ramp=gold z=0 pivot=12,12
+  poly 12,3 19,12 12,21 5,12 r=1.0
+  circle 12,12 r=3.2 ramp=bone
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose gem dy=sin(1.2) squash=sin(0.08)

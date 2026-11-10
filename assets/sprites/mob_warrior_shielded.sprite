@@ -1,0 +1,77 @@
+title "Greek Hoplite Warrior (Shielded)"
+type sprite
+size 64x64
+fps 10
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+ramp bronze_plate #4A2810 #8C5220 #D48B3B #FFE08A
+ramp royal_azure  #10264A #1D4E89 #348AC7 #8CE2FF
+ramp aspis_gold   #5C3409 #A86614 #E8AD28 #FFF294
+
+part shadow ramp=obsidian z=-10 pivot=32,56
+  box 32,56 13,3.2 r=2.0 step=0
+
+part cape ramp=royal_azure z=-5 pivot=32,26
+  poly 20,25 44,25 48,50 16,50 r=2.0
+
+part leg_l ramp=bronze_plate z=-2 pivot=27,43
+  capsule 27,43 26,54 r=3.6
+
+part leg_r ramp=bronze_plate z=-1 pivot=37,43
+  capsule 37,43 38,54 r=3.6
+
+part cuirass ramp=bronze_plate z=0 pivot=32,34 dither=bayer2
+  box 32,33 11.0,9.0 r=3.0
+  box 32,42 10.5,4.0 r=1.5 ramp=royal_azure
+
+part helmet ramp=bronze_plate z=4 pivot=32,18
+  poly 22,6 42,6 45,14 19,14 r=2.5 ramp=royal_azure
+  circle 32,19 r=8.2
+  box 32,22 7.5,4.8 r=1.5
+  box 32,21 5.2,1.6 step=0 ramp=obsidian
+  pixel 28,20 w=3 h=2 step=3 ramp=aspis_gold
+  pixel 34,20 w=3 h=2 step=3 ramp=aspis_gold
+
+part spear ramp=steel z=2 pivot=44,34
+  line 38,48 58,10 thick=2.4 ramp=wood
+  poly 55,14 61,5 59,17 ramp=steel
+
+part aspis_shield ramp=aspis_gold z=7 pivot=23,35 dither=bayer2
+  circle 23,35 r=11.5
+  ring 23,35 r=10.5 thick=2.0 ramp=bronze_plate
+  poly 23,28 18,40 20,40 23,32 26,40 28,40 ramp=royal_azure
+
+tag idle frames=4 duration=120ms loop=pingpong
+  pose cuirass dy=sin(1.0)
+  pose helmet dy=sin(1.0)
+  pose aspis_shield dy=sin(1.2)
+  pose spear dy=sin(1.0)
+
+tag run frames=4 duration=95ms loop=loop
+  pose cuirass dy=abs_sin(1.8)
+  pose helmet dy=abs_sin(1.8)
+  pose leg_l dy=sin(3.5) rot=sin(16.0)
+  pose leg_r dy=cos(3.5) rot=cos(16.0)
+  pose aspis_shield dy=sin(1.5) dx=cos(1.0)
+  pose spear dx=sin(2.5) dy=cos(1.5)
+
+tag shield_guard frames=4 duration=100ms loop=pingpong
+  pose aspis_shield dx=4 dy=-1 scale=1.12
+  pose helmet dy=1
+  pose spear rot=12 dx=2
+
+tag attack frames=4 duration=85ms loop=once
+  pose spear f=0..1 dx=0->-4 dy=0->2
+  pose spear f=2..3 dx=7->0 dy=-4->0 ease=out_quad
+  pose aspis_shield f=1..2 dx=0->-2
+
+tag hit frames=2 duration=90ms loop=once
+  pose cuirass dx=-3->0
+  pose aspis_shield dx=-2->0 squash=-0.10->0.0
+
+tag death frames=4 duration=110ms loop=once
+  pose cuirass f=0..3 dy=0->13 rot=0->68
+  pose helmet f=0..3 dy=0->15 rot=0->72
+  pose aspis_shield f=0..3 dy=0->14 dx=0->-8 rot=0->-45

@@ -1,0 +1,36 @@
+title "Golden Olympus Chest"
+type sprite
+size 48x48
+fps 10
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+ramp chest_marble #7A8299 #B8C2D9 #E6EEFF #FFFFFF
+ramp olympus_gold #5C3409 #A86614 #E8AD28 #FFF294
+
+part shadow ramp=obsidian z=-5 pivot=24,38
+  box 24,38 15,4 r=2.0 step=0
+
+part base ramp=chest_marble z=0 pivot=24,30 dither=bayer2
+  box 24,30 14,8 r=2.0
+  box 24,30 15,2 r=1.0 ramp=olympus_gold
+  box 14,30 2.5,8 r=0.8 ramp=olympus_gold
+  box 34,30 2.5,8 r=0.8 ramp=olympus_gold
+
+part treasure ramp=olympus_gold z=1 hidden=true pivot=24,23
+  circle 20,24 r=4.5
+  circle 28,24 r=4.5
+  circle 24,21 r=5.0 ramp=plasma
+
+part lid ramp=olympus_gold z=3 pivot=24,20 dither=bayer2
+  box 24,20 15,6 r=3.0
+  circle 24,24 r=3.2 ramp=crimson
+
+tag closed frames=4 duration=150ms loop=pingpong
+  pose lid dy=sin(0.8)
+  pose treasure visible=false f=0..3
+
+tag open frames=4 duration=100ms loop=once
+  pose lid f=0..3 dy=0->-8 squash=-0.15
+  pose treasure visible=true f=0..3 dy=0->-2 scale=1.10

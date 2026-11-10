@@ -1,0 +1,26 @@
+title "Divine Olympus Power-Up Relic"
+type sprite
+size 36x36
+fps 10
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+ramp divine_gold #5C3409 #A86614 #E8AD28 #FFF294
+ramp aether_cyan #1D1B5E #2C5CC9 #42B6F5 #C7F9FF
+
+part halo ramp=divine_gold z=0 pivot=18,18
+  ring 18,18 r=13.0 thick=2.2
+  poly 18,2 21,8 15,8 ramp=divine_gold
+  poly 18,34 21,28 15,28 ramp=divine_gold
+  poly 2,18 8,21 8,15 ramp=divine_gold
+  poly 34,18 28,21 28,15 ramp=divine_gold
+
+part core ramp=aether_cyan z=2 pivot=18,18
+  circle 18,18 r=8.5
+  poly 18,8 23,18 18,28 13,18 ramp=divine_gold
+  circle 18,18 r=3.0 ramp=bone
+
+tag idle frames=4 duration=110ms loop=pingpong
+  pose halo rot=0->45 squash=sin(0.06)
+  pose core dy=sin(1.5) squash=cos(0.08)
