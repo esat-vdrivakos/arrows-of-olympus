@@ -1,0 +1,20 @@
+title "Olympian Melee Crescent Slash Wave"
+type sprite
+size 48x48
+fps 12
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+ramp ares_bronze #4A2810 #8C5220 #D48B3B #FFE08A
+ramp edge_gleam  #7A8299 #B8C2D9 #E6EEFF #FFFFFF
+
+part outer_arc ramp=ares_bronze z=0 pivot=24,24 dither=bayer2
+  poly 14,6 32,12 40,24 32,36 14,42 24,28 24,20 r=2.0
+
+part inner_gleam ramp=edge_gleam z=2 pivot=26,24
+  poly 20,10 35,17 38,24 35,31 20,38 28,26 28,22 r=1.2
+
+tag slash frames=4 duration=65ms loop=loop
+  pose outer_arc scale=1.05 squash=-0.06->0.08 dx=0->2 ease=out_quad
+  pose inner_gleam scale=1.08 squash=-0.05->0.10 dx=0->3 ease=out_quad

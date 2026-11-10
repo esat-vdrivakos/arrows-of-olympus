@@ -1,0 +1,14 @@
+.git
+.github
+*.pdf
+*.png
+!assets/**/*.png
+public/game.wasm*
+public/wasm_exec.js
+scratch/
+tmp/
+bin/
+dist/
+build/
+.env
+.env.*

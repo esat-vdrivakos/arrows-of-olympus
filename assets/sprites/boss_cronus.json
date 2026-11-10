@@ -1,0 +1,937 @@
+{
+  "frames": [
+    {
+      "filename": "Titan Cronus - Lord of Time #0",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #1",
+      "frame": {
+        "x": 112,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #2",
+      "frame": {
+        "x": 224,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #3",
+      "frame": {
+        "x": 336,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #4",
+      "frame": {
+        "x": 448,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #5",
+      "frame": {
+        "x": 560,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #6",
+      "frame": {
+        "x": 672,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #7",
+      "frame": {
+        "x": 784,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #8",
+      "frame": {
+        "x": 0,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #9",
+      "frame": {
+        "x": 112,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #10",
+      "frame": {
+        "x": 224,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #11",
+      "frame": {
+        "x": 336,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 100
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #12",
+      "frame": {
+        "x": 448,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #13",
+      "frame": {
+        "x": 560,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #14",
+      "frame": {
+        "x": 672,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #15",
+      "frame": {
+        "x": 784,
+        "y": 112,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #16",
+      "frame": {
+        "x": 0,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #17",
+      "frame": {
+        "x": 112,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #18",
+      "frame": {
+        "x": 224,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #19",
+      "frame": {
+        "x": 336,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #20",
+      "frame": {
+        "x": 448,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #21",
+      "frame": {
+        "x": 560,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #22",
+      "frame": {
+        "x": 672,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #23",
+      "frame": {
+        "x": 784,
+        "y": 224,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 80
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #24",
+      "frame": {
+        "x": 0,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #25",
+      "frame": {
+        "x": 112,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #26",
+      "frame": {
+        "x": 224,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #27",
+      "frame": {
+        "x": 336,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #28",
+      "frame": {
+        "x": 448,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #29",
+      "frame": {
+        "x": 560,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #30",
+      "frame": {
+        "x": 672,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #31",
+      "frame": {
+        "x": 784,
+        "y": 336,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 85
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #32",
+      "frame": {
+        "x": 0,
+        "y": 448,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 90
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #33",
+      "frame": {
+        "x": 112,
+        "y": 448,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 90
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #34",
+      "frame": {
+        "x": 224,
+        "y": 448,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 130
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #35",
+      "frame": {
+        "x": 336,
+        "y": 448,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 130
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #36",
+      "frame": {
+        "x": 448,
+        "y": 448,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 130
+    },
+    {
+      "filename": "Titan Cronus - Lord of Time #37",
+      "frame": {
+        "x": 560,
+        "y": 448,
+        "w": 112,
+        "h": 112
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 112,
+        "h": 112
+      },
+      "sourceSize": {
+        "w": 112,
+        "h": 112
+      },
+      "duration": 130
+    }
+  ],
+  "meta": {
+    "app": "agy-game-studio/sprite-design",
+    "version": "1.0",
+    "image": "boss_cronus.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 896,
+      "h": 560
+    },
+    "frameWidth": 112,
+    "frameHeight": 112,
+    "cols": 8,
+    "rows": 5,
+    "scale": "1",
+    "frameTags": [
+      {
+        "name": "idle",
+        "fromFrame": 0,
+        "toFrame": 3,
+        "frames": 4,
+        "durationMs": 120,
+        "loop": "pingpong"
+      },
+      {
+        "name": "move",
+        "fromFrame": 4,
+        "toFrame": 7,
+        "frames": 4,
+        "durationMs": 100,
+        "loop": "loop"
+      },
+      {
+        "name": "run",
+        "fromFrame": 8,
+        "toFrame": 11,
+        "frames": 4,
+        "durationMs": 100,
+        "loop": "loop"
+      },
+      {
+        "name": "cleave",
+        "fromFrame": 12,
+        "toFrame": 15,
+        "frames": 4,
+        "durationMs": 80,
+        "loop": "once"
+      },
+      {
+        "name": "melee_attack",
+        "fromFrame": 16,
+        "toFrame": 19,
+        "frames": 4,
+        "durationMs": 80,
+        "loop": "once"
+      },
+      {
+        "name": "attack",
+        "fromFrame": 20,
+        "toFrame": 23,
+        "frames": 4,
+        "durationMs": 80,
+        "loop": "once"
+      },
+      {
+        "name": "summon",
+        "fromFrame": 24,
+        "toFrame": 27,
+        "frames": 4,
+        "durationMs": 85,
+        "loop": "once"
+      },
+      {
+        "name": "ranged_attack",
+        "fromFrame": 28,
+        "toFrame": 31,
+        "frames": 4,
+        "durationMs": 85,
+        "loop": "once"
+      },
+      {
+        "name": "hit",
+        "fromFrame": 32,
+        "toFrame": 33,
+        "frames": 2,
+        "durationMs": 90,
+        "loop": "once"
+      },
+      {
+        "name": "death",
+        "fromFrame": 34,
+        "toFrame": 37,
+        "frames": 4,
+        "durationMs": 130,
+        "loop": "once"
+      }
+    ]
+  }
+}

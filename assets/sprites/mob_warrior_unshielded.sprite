@@ -52,6 +52,18 @@ part xiphos ramp=iron_blade z=6 pivot=48,36
   capsule 48,36 58,20 r=2.6
   box 47,36 4.2,1.8 r=0.8 ramp=bronze_plate
 
+part javelin ramp=wood z=6 hidden=true pivot=46,32
+  line 36,42 58,18 thick=2.2 ramp=wood
+  poly 55,21 62,14 59,24 ramp=iron_blade
+
+part slash_arc ramp=crimson_crest z=9 hidden=true pivot=48,32
+  poly 48,14 59,24 61,36 52,48 54,34 46,22 r=1.5
+  poly 52,18 60,28 56,42 54,30 r=1.0 ramp=bronze_plate
+
+part range_flash ramp=bronze_plate z=9 hidden=true pivot=55,30
+  poly 55,22 58,28 62,30 58,32 55,38 53,32 49,30 53,28
+  circle 55,30 r=2.4 ramp=crimson_crest
+
 tag idle frames=4 duration=120ms loop=pingpong
   pose cuirass dy=sin(1.0) squash=sin(0.05)
   pose helmet dy=sin(1.0)
@@ -66,12 +78,45 @@ tag run frames=4 duration=90ms loop=loop
   pose arm_r rot=sin(15.0)
   pose xiphos rot=sin(18.0)
 
-tag attack frames=4 duration=80ms loop=once
-  pose arm_r f=0..1 rot=0->-35
-  pose arm_r f=2..3 rot=55->0 ease=out_quad
-  pose xiphos f=0..1 rot=0->-40
-  pose xiphos f=2..3 rot=65->0 scale=1.18 ease=out_quad
-  pose cuirass f=1..2 dx=0->4
+// Shared Melee Attack Profile (Wind-up Back-lean -> Forward Lunge + Wide Cleave Arc -> Recovery)
+tag attack frames=4 duration=75ms loop=once
+  pose xiphos visible=true f=0..0 rot=-55 dx=-2 dy=-4
+  pose xiphos visible=true f=1..2 rot=-20->75 dx=4 dy=2 scale=1.18 ease=out_quad
+  pose xiphos visible=true f=3..3 rot=40->0 dx=0 dy=0
+  pose javelin visible=false f=0..3
+  pose slash_arc visible=true f=1..2 dx=0->3 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-2
+  pose arm_r f=1..2 rot=-20->55 dx=3 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose cuirass f=0..0 dx=-2 rot=-6
+  pose cuirass f=1..2 dx=0->4 rot=10 squash=-0.08 ease=out_quad
+  pose cuirass f=3..3 dx=2->0 rot=4->0
+
+tag melee_attack frames=4 duration=75ms loop=once
+  pose xiphos visible=true f=0..0 rot=-55 dx=-2 dy=-4
+  pose xiphos visible=true f=1..2 rot=-20->75 dx=4 dy=2 scale=1.18 ease=out_quad
+  pose xiphos visible=true f=3..3 rot=40->0 dx=0 dy=0
+  pose javelin visible=false f=0..3
+  pose slash_arc visible=true f=1..2 dx=0->3 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-2
+  pose arm_r f=1..2 rot=-20->55 dx=3 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose cuirass f=0..0 dx=-2 rot=-6
+  pose cuirass f=1..2 dx=0->4 rot=10 squash=-0.08 ease=out_quad
+  pose cuirass f=3..3 dx=2->0 rot=4->0
+
+// Shared Ranged Attack Profile (Draw/Aim Tension -> Release Snap + Flash -> Recoil Recovery)
+tag ranged_attack frames=4 duration=75ms loop=once
+  pose xiphos visible=false f=0..3
+  pose javelin visible=true f=0..1 dx=0->-4 dy=0->-2 rot=0->-18 scale=1.10 squash=0.0->0.08
+  pose javelin visible=true f=2..3 dx=5->0 dy=-2->0 rot=15->0 ease=out_quad
+  pose arm_r f=0..1 dx=0->-4 rot=0->-22
+  pose arm_r f=2..3 dx=3->0 rot=12->0 ease=out_quad
+  pose cuirass f=0..1 dx=0->-3 rot=0->-6 squash=0.0->0.06
+  pose cuirass f=2..3 dx=2->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose helmet f=0..1 dx=0->-2
+  pose helmet f=2..3 dx=2->0
+  pose range_flash visible=true f=2..2 dx=2 scale=1.2
 
 tag hit frames=2 duration=90ms loop=once
   pose cuirass dx=-3->0 squash=-0.12->0.0

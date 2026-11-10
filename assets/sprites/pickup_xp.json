@@ -1,0 +1,117 @@
+{
+  "frames": [
+    {
+      "filename": "Ambrosia XP Gem #0",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 24,
+        "h": 24
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Ambrosia XP Gem #1",
+      "frame": {
+        "x": 24,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 24,
+        "h": 24
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Ambrosia XP Gem #2",
+      "frame": {
+        "x": 48,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 24,
+        "h": 24
+      },
+      "duration": 120
+    },
+    {
+      "filename": "Ambrosia XP Gem #3",
+      "frame": {
+        "x": 72,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 24,
+        "h": 24
+      },
+      "duration": 120
+    }
+  ],
+  "meta": {
+    "app": "agy-game-studio/sprite-design",
+    "version": "1.0",
+    "image": "pickup_xp.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 96,
+      "h": 24
+    },
+    "frameWidth": 24,
+    "frameHeight": 24,
+    "cols": 4,
+    "rows": 1,
+    "scale": "1",
+    "frameTags": [
+      {
+        "name": "idle",
+        "fromFrame": 0,
+        "toFrame": 3,
+        "frames": 4,
+        "durationMs": 120,
+        "loop": "pingpong"
+      }
+    ]
+  }
+}

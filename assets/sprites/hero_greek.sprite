@@ -62,6 +62,14 @@ part sword ramp=steel z=7 hidden=true pivot=45,34
   box 45,34 4.0,1.8 r=0.8 ramp=divine_gold
   capsule 42,37 45,34 r=1.8 ramp=spartan_red
 
+part slash_arc ramp=divine_gold z=9 hidden=true pivot=48,32
+  poly 48,14 59,24 61,36 52,48 54,34 46,22 r=1.5
+  poly 52,18 60,28 56,42 54,30 r=1.0 ramp=marble_tunic
+
+part range_flash ramp=divine_gold z=9 hidden=true pivot=55,33
+  poly 55,25 58,31 62,33 58,35 55,41 53,35 49,33 53,31
+  circle 55,33 r=2.5 ramp=marble_tunic
+
 tag idle frames=4 duration=120ms loop=pingpong
   pose torso dy=sin(1.0) squash=sin(0.05)
   pose head dy=sin(1.0)
@@ -80,23 +88,57 @@ tag run frames=4 duration=90ms loop=loop
   pose arm_r dy=sin(2.0) rot=sin(10.0)
   pose bow dy=sin(2.0) rot=sin(8.0)
 
-tag bow_attack frames=4 duration=75ms loop=once
-  pose bow visible=true f=0..3 dx=0->3
+// Shared Ranged Attack Profile (Draw/Aim Tension -> Release Snap + Flash -> Recoil Recovery)
+tag ranged_attack frames=4 duration=75ms loop=once
+  pose bow visible=true f=0..1 dx=0->2 scale=1.10 squash=0.0->0.08
+  pose bow visible=true f=2..3 dx=3->0 scale=1.02 squash=-0.06->0.0 ease=out_quad
   pose sword visible=false f=0..3
-  pose arm_r f=0..1 dx=0->-3
-  pose arm_r f=2..3 dx=2->0
-  pose torso f=0..1 rot=0->-5
-  pose torso f=2..3 rot=4->0
+  pose arm_r f=0..1 dx=0->-4 rot=0->-22
+  pose arm_r f=2..3 dx=3->0 rot=12->0 ease=out_quad
+  pose torso f=0..1 dx=0->-3 rot=0->-6 squash=0.0->0.06
+  pose torso f=2..3 dx=2->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose head f=0..1 dx=0->-2
+  pose head f=2..3 dx=2->0
+  pose range_flash visible=true f=2..2 dx=2 scale=1.2
+
+tag bow_attack frames=4 duration=75ms loop=once
+  pose bow visible=true f=0..1 dx=0->2 scale=1.10 squash=0.0->0.08
+  pose bow visible=true f=2..3 dx=3->0 scale=1.02 squash=-0.06->0.0 ease=out_quad
+  pose sword visible=false f=0..3
+  pose arm_r f=0..1 dx=0->-4 rot=0->-22
+  pose arm_r f=2..3 dx=3->0 rot=12->0 ease=out_quad
+  pose torso f=0..1 dx=0->-3 rot=0->-6 squash=0.0->0.06
+  pose torso f=2..3 dx=2->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose head f=0..1 dx=0->-2
+  pose head f=2..3 dx=2->0
+  pose range_flash visible=true f=2..2 dx=2 scale=1.2
+
+// Shared Melee Attack Profile (Wind-up Back-lean -> Forward Lunge + Wide Cleave Arc -> Recovery)
+tag melee_attack frames=4 duration=75ms loop=once
+  pose bow visible=false f=0..3
+  pose sword visible=true f=0..0 rot=-55 dx=-2 dy=-4
+  pose sword visible=true f=1..2 rot=-20->75 dx=4 dy=2 scale=1.18 ease=out_quad
+  pose sword visible=true f=3..3 rot=40->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->3 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-2
+  pose arm_r f=1..2 rot=-20->55 dx=3 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-2 rot=-6
+  pose torso f=1..2 dx=0->4 rot=10 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
 
 tag sword_attack frames=4 duration=75ms loop=once
   pose bow visible=false f=0..3
   pose sword visible=true f=0..0 rot=-55 dx=-2 dy=-4
-  pose sword visible=true f=1..2 rot=-20->75 dx=3 dy=2 scale=1.18 ease=out_quad
-  pose sword visible=true f=3..3 rot=45->0 dx=0 dy=0
-  pose arm_r f=0..0 rot=-35
-  pose arm_r f=1..2 rot=45 ease=out_quad
-  pose arm_r f=3..3 rot=10->0
-  pose torso f=1..2 rot=10 squash=-0.08
+  pose sword visible=true f=1..2 rot=-20->75 dx=4 dy=2 scale=1.18 ease=out_quad
+  pose sword visible=true f=3..3 rot=40->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->3 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-2
+  pose arm_r f=1..2 rot=-20->55 dx=3 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-2 rot=-6
+  pose torso f=1..2 dx=0->4 rot=10 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
 
 tag hit frames=2 duration=90ms loop=once
   pose torso dx=-3->0 squash=-0.12->0.0

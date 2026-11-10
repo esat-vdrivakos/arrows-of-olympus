@@ -1,0 +1,117 @@
+{
+  "frames": [
+    {
+      "filename": "Divine Olympus Power-Up Relic #0",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 36,
+        "h": 36
+      },
+      "duration": 110
+    },
+    {
+      "filename": "Divine Olympus Power-Up Relic #1",
+      "frame": {
+        "x": 36,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 36,
+        "h": 36
+      },
+      "duration": 110
+    },
+    {
+      "filename": "Divine Olympus Power-Up Relic #2",
+      "frame": {
+        "x": 72,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 36,
+        "h": 36
+      },
+      "duration": 110
+    },
+    {
+      "filename": "Divine Olympus Power-Up Relic #3",
+      "frame": {
+        "x": 108,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 36
+      },
+      "sourceSize": {
+        "w": 36,
+        "h": 36
+      },
+      "duration": 110
+    }
+  ],
+  "meta": {
+    "app": "agy-game-studio/sprite-design",
+    "version": "1.0",
+    "image": "powerup_relic.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 144,
+      "h": 36
+    },
+    "frameWidth": 36,
+    "frameHeight": 36,
+    "cols": 4,
+    "rows": 1,
+    "scale": "1",
+    "frameTags": [
+      {
+        "name": "idle",
+        "fromFrame": 0,
+        "toFrame": 3,
+        "frames": 4,
+        "durationMs": 110,
+        "loop": "pingpong"
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+title "Apollo Golden Bow Release"
+type sfx
+inst string_snap preset=jump_arcade wave=triangle vol=0.30 adsr=0.002,0.06,0.0,0.04
+inst fletch_air  wave=noise noise_filter=0.45 vol=0.22 adsr=0.002,0.07,0.0,0.05 hpf=1200
+track bow string_snap: 520Hz->180Hz:100ms
+track air fletch_air:  400Hz:100ms

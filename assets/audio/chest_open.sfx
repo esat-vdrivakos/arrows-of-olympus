@@ -1,0 +1,4 @@
+title "Golden Olympus Chest Open"
+type sfx
+inst chime preset=gem_shimmer vol=0.32
+track main chime: G5:70ms B5:70ms D6:90ms G6:180ms

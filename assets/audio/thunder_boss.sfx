@@ -1,0 +1,6 @@
+title "Zeus & Cronus Boss Cast"
+type sfx
+inst bolt   preset=plasma_gun vol=0.32
+inst rumble preset=explosion_deep vol=0.34
+track z bolt:   1100Hz->140Hz:320ms
+track r rumble: 110Hz->28Hz:320ms

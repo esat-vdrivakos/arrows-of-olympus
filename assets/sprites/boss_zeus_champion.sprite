@@ -39,6 +39,9 @@ part pauldrons ramp=olympian_gold z=2 pivot=48,36
   poly 20,31 27,24 31,34 ramp=storm_azure
   poly 76,31 69,24 65,34 ramp=storm_azure
 
+part arm_r ramp=olympian_gold z=3 pivot=66,42
+  capsule 66,42 74,52 r=4.8
+
 part head ramp=olympian_gold z=4 pivot=48,25
   poly 34,8 62,8 66,18 30,18 r=2.5 ramp=storm_azure
   circle 48,25 r=11.0
@@ -55,6 +58,14 @@ part thunder_spear ramp=storm_azure z=6 pivot=72,48
   poly 77,20 88,4 85,24 ramp=storm_azure
   poly 74,28 84,18 79,34 ramp=storm_azure
 
+part slash_arc ramp=storm_azure z=9 hidden=true pivot=72,46
+  poly 70,16 88,32 90,52 76,72 80,48 68,28 r=2.0
+  poly 76,24 88,40 82,62 79,44 r=1.5 ramp=cloud_white
+
+part range_flash ramp=storm_azure z=9 hidden=true pivot=82,42
+  poly 82,28 86,38 94,42 86,46 82,56 78,46 70,42 78,38
+  circle 82,42 r=4.0 ramp=cloud_white
+
 tag idle frames=4 duration=120ms loop=pingpong
   pose torso dy=sin(1.5) squash=sin(0.05)
   pose head dy=sin(1.5)
@@ -69,16 +80,65 @@ tag move frames=4 duration=95ms loop=loop
   pose halo rot=sin(12.0)
   pose thunder_spear dy=sin(3.0) rot=sin(12.0)
 
-tag attack frames=4 duration=85ms loop=once
-  pose thunder_spear f=0..1 dx=0->-5 dy=0->4 rot=0->-20
-  pose thunder_spear f=2..3 dx=10->0 dy=-8->0 rot=25->0 scale=1.18 ease=out_quad
-  pose torso f=1..2 dx=0->5
+tag run frames=4 duration=95ms loop=loop
+  pose torso dy=abs_sin(2.5)
+  pose head dy=abs_sin(2.5)
+  pose leg_l dy=sin(5.0) rot=sin(18.0)
+  pose leg_r dy=cos(5.0) rot=cos(18.0)
+  pose halo rot=sin(12.0)
+  pose thunder_spear dy=sin(3.0) rot=sin(12.0)
 
-tag cast frames=4 duration=100ms loop=once
-  pose halo f=0..3 squash=0.0->0.18 rot=0->45
-  pose thunder_spear f=0..2 dy=0->-10
-  pose thunder_spear f=3..3 dy=0
-  pose pauldrons f=0..3 dy=0->-3
+// Shared Melee Attack Profile (Wind-up Back-lean -> Forward Lunge + Wide Cleave Arc -> Recovery)
+tag attack frames=4 duration=80ms loop=once
+  pose thunder_spear f=0..0 rot=-50 dx=-4 dy=-3
+  pose thunder_spear f=1..2 rot=-20->70 dx=6 dy=3 scale=1.18 ease=out_quad
+  pose thunder_spear f=3..3 rot=35->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->4 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-3
+  pose arm_r f=1..2 rot=-20->55 dx=4 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-3 rot=-6
+  pose torso f=1..2 dx=0->6 rot=10 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
+
+tag melee_attack frames=4 duration=80ms loop=once
+  pose thunder_spear f=0..0 rot=-50 dx=-4 dy=-3
+  pose thunder_spear f=1..2 rot=-20->70 dx=6 dy=3 scale=1.18 ease=out_quad
+  pose thunder_spear f=3..3 rot=35->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->4 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-3
+  pose arm_r f=1..2 rot=-20->55 dx=4 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-3 rot=-6
+  pose torso f=1..2 dx=0->6 rot=10 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
+
+// Shared Ranged Attack Profile (Draw/Aim Tension -> Release Snap + Flash -> Recoil Recovery)
+tag cast frames=4 duration=85ms loop=once
+  pose thunder_spear f=0..1 dx=0->-5 dy=0->-3 rot=0->-22 scale=1.12 squash=0.0->0.08
+  pose thunder_spear f=2..3 dx=6->0 dy=-2->0 rot=18->0 ease=out_quad
+  pose arm_r f=0..1 dx=0->-5 rot=0->-24
+  pose arm_r f=2..3 dx=4->0 rot=14->0 ease=out_quad
+  pose torso f=0..1 dx=0->-4 rot=0->-6 squash=0.0->0.07
+  pose torso f=2..3 dx=3->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose halo f=0..2 squash=0.0->0.16 rot=0->45
+  pose halo f=3..3 squash=0.0 rot=45->60
+  pose range_flash visible=true f=2..2 dx=3 scale=1.25
+
+tag ranged_attack frames=4 duration=85ms loop=once
+  pose thunder_spear f=0..1 dx=0->-5 dy=0->-3 rot=0->-22 scale=1.12 squash=0.0->0.08
+  pose thunder_spear f=2..3 dx=6->0 dy=-2->0 rot=18->0 ease=out_quad
+  pose arm_r f=0..1 dx=0->-5 rot=0->-24
+  pose arm_r f=2..3 dx=4->0 rot=14->0 ease=out_quad
+  pose torso f=0..1 dx=0->-4 rot=0->-6 squash=0.0->0.07
+  pose torso f=2..3 dx=3->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose halo f=0..2 squash=0.0->0.16 rot=0->45
+  pose halo f=3..3 squash=0.0 rot=45->60
+  pose range_flash visible=true f=2..2 dx=3 scale=1.25
+
+tag hit frames=2 duration=90ms loop=once
+  pose torso dx=-4->0 squash=-0.12->0.0
+  pose head dx=-5->0 rot=-10->0
 
 tag death frames=4 duration=120ms loop=once
   pose torso f=0..3 dy=0->18 rot=0->65

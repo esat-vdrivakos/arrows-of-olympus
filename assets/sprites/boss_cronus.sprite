@@ -43,6 +43,9 @@ part shoulders ramp=chronos_gold z=2 pivot=56,40
   poly 20,35 30,24 36,38 ramp=crimson_flame
   poly 92,35 82,24 76,38 ramp=crimson_flame
 
+part arm_r ramp=titan_obsidian z=3 pivot=78,48
+  capsule 78,48 86,60 r=5.8
+
 part head ramp=titan_obsidian z=4 pivot=56,27
   poly 38,8 46,20 56,4 66,20 74,8 70,24 42,24 ramp=chronos_gold
   circle 56,28 r=13.0
@@ -55,6 +58,14 @@ part sickle ramp=adamant_blade z=7 pivot=82,56
   capsule 88,22 64,12 r=4.5 ramp=adamant_blade
   capsule 64,12 46,24 r=3.5 ramp=adamant_blade
   circle 86,26 r=4.5 ramp=crimson_flame
+
+part slash_arc ramp=adamant_blade z=9 hidden=true pivot=84,54
+  poly 80,18 102,36 105,60 88,84 92,56 78,32 r=2.5
+  poly 88,28 102,46 94,72 91,50 r=1.5 ramp=chronos_gold
+
+part range_flash ramp=chronos_gold z=9 hidden=true pivot=94,48
+  poly 94,32 99,43 108,48 99,53 94,64 89,53 80,48 89,43
+  circle 94,48 r=4.5 ramp=adamant_blade
 
 tag idle frames=4 duration=120ms loop=pingpong
   pose torso dy=sin(2.0) squash=sin(0.05)
@@ -70,17 +81,80 @@ tag move frames=4 duration=100ms loop=loop
   pose time_wheel rot=0->45
   pose sickle rot=sin(14.0)
 
-tag cleave frames=4 duration=85ms loop=once
-  pose sickle f=0..1 rot=0->-45 dx=0->-6
-  pose sickle f=2..3 rot=75->0 dx=8->0 scale=1.20 ease=out_quad
-  pose torso f=1..2 rot=12 squash=-0.08
+tag run frames=4 duration=100ms loop=loop
+  pose torso dy=abs_sin(3.0)
+  pose head dy=abs_sin(3.0)
+  pose leg_l dy=sin(6.0) rot=sin(16.0)
+  pose leg_r dy=cos(6.0) rot=cos(16.0)
+  pose time_wheel rot=0->45
+  pose sickle rot=sin(14.0)
+
+// Shared Melee Attack Profile (Wind-up Back-lean -> Forward Lunge + Wide Cleave Arc -> Recovery)
+tag cleave frames=4 duration=80ms loop=once
+  pose sickle f=0..0 rot=-55 dx=-5 dy=-4
+  pose sickle f=1..2 rot=-20->75 dx=8 dy=3 scale=1.20 ease=out_quad
+  pose sickle f=3..3 rot=40->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->4 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-3
+  pose arm_r f=1..2 rot=-20->55 dx=4 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-3 rot=-6
+  pose torso f=1..2 dx=0->6 rot=12 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
   pose time_wheel f=0..3 rot=0->90
 
-tag summon frames=4 duration=110ms loop=once
-  pose time_wheel f=0..3 squash=0.0->0.16 rot=0->90
-  pose shoulders f=0..2 dy=0->-5
-  pose shoulders f=3..3 dy=0
-  pose head f=0..2 dy=0->-3
+tag melee_attack frames=4 duration=80ms loop=once
+  pose sickle f=0..0 rot=-55 dx=-5 dy=-4
+  pose sickle f=1..2 rot=-20->75 dx=8 dy=3 scale=1.20 ease=out_quad
+  pose sickle f=3..3 rot=40->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->4 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-3
+  pose arm_r f=1..2 rot=-20->55 dx=4 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-3 rot=-6
+  pose torso f=1..2 dx=0->6 rot=12 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
+  pose time_wheel f=0..3 rot=0->90
+
+tag attack frames=4 duration=80ms loop=once
+  pose sickle f=0..0 rot=-55 dx=-5 dy=-4
+  pose sickle f=1..2 rot=-20->75 dx=8 dy=3 scale=1.20 ease=out_quad
+  pose sickle f=3..3 rot=40->0 dx=0 dy=0
+  pose slash_arc visible=true f=1..2 dx=0->4 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-3
+  pose arm_r f=1..2 rot=-20->55 dx=4 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose torso f=0..0 dx=-3 rot=-6
+  pose torso f=1..2 dx=0->6 rot=12 squash=-0.08 ease=out_quad
+  pose torso f=3..3 dx=2->0 rot=4->0
+  pose time_wheel f=0..3 rot=0->90
+
+// Shared Ranged Attack Profile (Draw/Aim Tension -> Release Snap + Flash -> Recoil Recovery)
+tag summon frames=4 duration=85ms loop=once
+  pose sickle f=0..1 dx=0->-5 dy=0->-3 rot=0->-22 scale=1.12 squash=0.0->0.08
+  pose sickle f=2..3 dx=7->0 dy=-2->0 rot=18->0 ease=out_quad
+  pose arm_r f=0..1 dx=0->-5 rot=0->-24
+  pose arm_r f=2..3 dx=4->0 rot=14->0 ease=out_quad
+  pose torso f=0..1 dx=0->-4 rot=0->-6 squash=0.0->0.07
+  pose torso f=2..3 dx=3->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose time_wheel f=0..2 squash=0.0->0.16 rot=0->60
+  pose time_wheel f=3..3 squash=0.0 rot=60->90
+  pose range_flash visible=true f=2..2 dx=3 scale=1.25
+
+tag ranged_attack frames=4 duration=85ms loop=once
+  pose sickle f=0..1 dx=0->-5 dy=0->-3 rot=0->-22 scale=1.12 squash=0.0->0.08
+  pose sickle f=2..3 dx=7->0 dy=-2->0 rot=18->0 ease=out_quad
+  pose arm_r f=0..1 dx=0->-5 rot=0->-24
+  pose arm_r f=2..3 dx=4->0 rot=14->0 ease=out_quad
+  pose torso f=0..1 dx=0->-4 rot=0->-6 squash=0.0->0.07
+  pose torso f=2..3 dx=3->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose time_wheel f=0..2 squash=0.0->0.16 rot=0->60
+  pose time_wheel f=3..3 squash=0.0 rot=60->90
+  pose range_flash visible=true f=2..2 dx=3 scale=1.25
+
+tag hit frames=2 duration=90ms loop=once
+  pose torso dx=-4->0 squash=-0.12->0.0
+  pose head dx=-5->0 rot=-10->0
 
 tag death frames=4 duration=130ms loop=once
   pose torso f=0..3 dy=0->22 rot=0->60

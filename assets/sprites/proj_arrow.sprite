@@ -1,0 +1,25 @@
+title "Olympian Ranged Projectile Arrow"
+type sprite
+size 32x32
+fps 12
+palette neogeo
+outline #141020
+light -0.5,-0.7
+
+ramp sun_gold    #5C3409 #A86614 #E8AD28 #FFF294
+ramp feather_wht #7A8299 #B8C2D9 #E6EEFF #FFFFFF
+
+part fletching ramp=feather_wht z=0 pivot=8,16
+  poly 4,11 11,15 11,17 4,21 r=0.5
+
+part shaft ramp=sun_gold z=1 pivot=16,16
+  capsule 7,16 23,16 r=1.8
+
+part head ramp=sun_gold z=2 pivot=24,16
+  poly 20,11 29,16 20,21 r=0.8
+  pixel 24,15 w=2 h=2 step=3 ramp=feather_wht
+
+tag fly frames=4 duration=70ms loop=loop
+  pose shaft squash=sin(0.06)
+  pose head dx=sin(1.0)
+  pose fletching dy=sin(1.0)

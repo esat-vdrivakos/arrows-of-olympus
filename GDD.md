@@ -16,7 +16,7 @@ To ship a complete, playable, visually rich **Arrows of Olympus** in 30 minutes,
 
 | Phase | Time Budget | Deliverable | Skills & Tools |
 | :--- | :---: | :--- | :--- |
-| **Phase 1: Sprites & Olympus Arena Background** | **Minutes 0–10** | 1. **Greek Hero** sprite sheets / stances (`idle`, `run`, `bow_attack`, `sword_attack`, `hit`, `death`)<br>2. **Mobs**: **Skeleton Spartoi** (starting mob) & **Greek Hoplite Warriors** (Unshielded & Bronze-Shielded variants)<br>3. **Bosses**: **Zeus's Champion** (mid-boss) & **Titan Cronus** (final boss)<br>4. **Olympus Background**: `1280x720` Mount Olympus marble pantheon courtyard<br>5. **`.sprite` DSL Props**: Golden Arrows, Sword Slash Waves, Lightning bolts, Cronus scythe waves, **Olympian Treasure Chests**, **Power-Up Relics** (Attack Speed, Damage, Movement Speed, Heal), Ambrosia XP gems, Marble pillars | `nano-banana` + `sprite-design` |
+| **Phase 1: Sprites & Olympus Arena Background** | **Minutes 0–10** | 1. **Greek Hero** (`idle`, `run`, `melee_attack` / `sword_attack`, `ranged_attack` / `bow_attack`, `hit`, `death`)<br>2. **Mobs**: **Skeleton Spartoi (Melee)**, **Skeleton Spartoi Archer (Ranged)**, & **Greek Hoplite Warriors** (Unshielded & Bronze-Shielded variants) — all sharing standardized `melee_attack` and `ranged_attack` animations<br>3. **Bosses**: **Zeus's Champion** (mid-boss) & **Titan Cronus** (final boss) — sharing standardized `melee_attack` and `ranged_attack` choreography<br>4. **Olympus Background**: `1280x720` Mount Olympus marble pantheon courtyard<br>5. **`.sprite` DSL Props & FX**: Golden Arrows (`proj_arrow`), Melee Crescent Slash Waves (`fx_slash_wave`), **Olympian Treasure Chests** (`prop_chest`), **Power-Up Relics** (`powerup_relic`), Ambrosia XP gems (`pickup_xp`), Marble pillars (`prop_pillar`) | `nano-banana` + `sprite-design` |
 | **Phase 2: "12 Gods of Olympus" Music & Combat SFX** | **Minutes 10–15** | 1. **`olympus_12_gods.music`**: Phrygian/Dorian epic Greek soundtrack evoking the 12 Olympians (Kithara/Lyre plucks, Aulos melodies, Bronze Horn brass, War Timpani, anchored sub-bass)<br>2. **Combat `.sfx` Suite**: `bow_shoot.sfx`, `sword_slash.sfx`, `arrow_hit.sfx`, `shield_clang.sfx`, `chest_open.sfx`, `powerup_pickup.sfx`, `xp_ambrosia.sfx`, `boon_levelup.sfx`, `thunder_boss.sfx`, `hero_hurt.sfx` | `procedural-music` + `procedural-sfx` |
 | **Phase 3: Core *Archer.io* Ranged & Melee Engine** | **Minutes 15–25** | 1. **Start-of-Run Weapon Select**: Choose between **Bow of Apollo (Ranged Auto-Shooter)** or **Sword of Ares (Melee Cleave & Slash-Wave)**<br>2. **Movement & Auto-Combat**: 8-way movement + continuous auto-attack (ranged arrows vs. wide melee cleave arcs)<br>3. **Map Chests & NPC Drop Power-Ups**: Breakable Golden Olympus Chests + monster drops granting **Attack Speed**, **Attack Damage**, **Movement Speed**, and **Nectar Heal** pickups<br>4. **12 Olympian Boons System**: Level-up overlay offering 3 random God Upgrades that dynamically adapt to Bow or Sword<br>5. **Wave Spawner & Boss AI**: Escalating waves (Skeletons -> Unshielded & Shielded Warriors -> Zeus's Champion -> Titan Cronus) | `ebitengineer` |
 | **Phase 4: Polish, Verification & WASM Playtest** | **Minutes 25–30** | 1. Compile & verify with `godoctor` (`go vet`, native & `js/wasm` builds)<br>2. Launch **Game Dev Studio** (`sidecar://agy-game-studio/studio/playtest`) for live 60 FPS playtesting & DVR scrubbing | `godoctor` + `game-dev-studio` |
@@ -72,17 +72,18 @@ To ship a complete, playable, visually rich **Arrows of Olympus** in 30 minutes,
     - **Dionysus (God of Wine)**: *Intoxicating Miasma* (Attacks apply stacking poison DoT).
     - **Hera (Queen of Heaven)**: *Sovereign Rearguard* (**Bow**: Rear arrow | **Sword**: 360° Whirlwind back-slash + +20% XP gain).
 - **Enemy Roster & Systemic Challenges**:
-  1. **Starting Mob — Skeleton Spartoi (`skeleton`)**:
-     - Fast, brittle undead soldiers summoned from dragon teeth (`40 HP`, `115 px/s`). Swarm the player in packs during Waves 1–3.
-  2. **Regular Mob — Greek Warriors (`warrior_unshielded` & `warrior_shielded`)**:
-     - **Unshielded Warrior**: Aggressive bronze-sword infantry (`85 HP`, `100 px/s`) that lunges when within `140 px`.
-     - **Shielded Hoplite Warrior**: Carries a heavy bronze Aspis shield (`150 HP`, `75 px/s`, **blocks 50% frontal projectile damage** and glows gold when deflecting arrows—encouraging piercing/ricochet boons or flanking angles).
+  1. **Starting Mob — Skeleton Spartoi (`mob_skeleton` [Melee] & `mob_skeleton_archer` [Ranged])**:
+     - **Melee Skeleton Spartoi (`mob_skeleton`)**: Fast, brittle undead soldiers armed with curved kopis blades (`40 HP`, `115 px/s`, `melee_attack`). Swarm the player in packs during Waves 1–3.
+     - **Ranged Skeleton Spartoi Archer (`mob_skeleton_archer`)**: Undead bowmen armed with Stygian bone bows (`32 HP`, `95 px/s`, `ranged_attack`) who keep distance (`280 px`) and fire cursed arrows (`proj_arrow`), plus fallback dagger slash (`melee_attack`) if cornered.
+  2. **Regular Mob — Greek Warriors (`mob_warrior_unshielded` & `mob_warrior_shielded`)**:
+     - **Unshielded Warrior**: Aggressive bronze-sword infantry (`85 HP`, `100 px/s`) that lunges into a sweeping cleave (`melee_attack`) within `140 px` or hurls a bronze javelin (`ranged_attack`) from mid-range.
+     - **Shielded Hoplite Warrior**: Carries a heavy bronze Aspis shield (`150 HP`, `75 px/s`, **blocks 50% frontal projectile damage** in `shield_guard`, thrusts/cleaves in close quarters with `melee_attack`, and hurls spears with `ranged_attack`).
   3. **Mid-Boss (Wave 2 Climax) — Zeus's Champion (`boss_zeus_champion`)**:
-     - Towering golden-armored demigod (`1,200 HP`). Alternates between **Thunder Spear Dash** (telegraphed red rush line) and **8-Way Lightning Nova** (radial electric orbs).
+     - Towering golden-armored demigod (`1,200 HP`). Alternates between **Thunder Spear Cleave/Dash** (`melee_attack` / `attack`) and **8-Way Lightning Nova** (`ranged_attack` / `cast`).
   4. **Final Boss (Wave 3 Climax) — Titan Cronus (`boss_cronus`)**:
-     - Colossal Lord of Time (`2,500 HP`). Executes three signature phases:
-       - *Adamant Sickle Cleave*: Fires sweeping crescent energy waves toward the hero.
-       - *Chronos Time-Rift*: Spawns a slow-field vortex on the arena floor while summoning Skeleton & Warrior reinforcements.
+     - Colossal Lord of Time (`2,500 HP`). Executes three signature phases using shared `melee_attack` (`cleave`) and `ranged_attack` (`summon`) animations:
+       - *Adamant Sickle Cleave (`melee_attack` / `cleave`)*: Wide sweeping melee slash that also launches crescent energy waves (`fx_slash_wave`) toward the hero.
+       - *Chronos Time-Rift (`ranged_attack` / `summon`)*: Ranged cast that spawns a slow-field vortex on the arena floor while summoning Skeleton & Warrior reinforcements.
        - *Titan's Wrath (Enrage < 40% HP)*: Radial spiral barrage of golden time-shards.
 - **Win & Loss Conditions**:
   - **Win Condition**: Survive all 3 Olympian Trial Waves (Wave 1: Skeleton Swarm & Warriors -> Wave 2: Phalanx Assault + **Zeus's Champion** -> Wave 3: Titan Legion + **Titan Cronus**) and defeat **Titan Cronus** with `HP > 0`.
@@ -109,15 +110,32 @@ To ship a complete, playable, visually rich **Arrows of Olympus** in 30 minutes,
   - `[x]` **Native 2D HD (`256x256` per frame, scaled cleanly on `1280x720` canvas)** for Characters & Bosses.
   - `[x]` **Crisp `.sprite` Procedural Assets (`32x32`–`64x64`)** for high-density projectiles, XP gems, orbiting shields, and arena pillars.
 - **Selected Visual Pipeline Mode**: **Path C: Hybrid Pipeline**
-  - **AI Character Sheets & Arena Background (`nano-banana` + `sprite-design` normalize)**:
-    1. `assets/images/olympus_bg.png`: `1280x720` top-down Mount Olympus marble courtyard with golden inlays, clouds at the perimeter, and ancient Greek mosaic emblem in the center.
-    2. `assets/sprites/hero_greek.*`: Greek Hero (`idle`, `run`, `bow_attack`, `sword_attack`, `hit`, `death`).
-    3. `assets/sprites/mob_skeleton.*`: Skeleton Spartoi (`idle`, `run`, `attack`, `hit`, `death`).
-    4. `assets/sprites/mob_warrior.*`: Greek Hoplite Warrior (`idle`, `run`, `attack`, `shield_guard`, `hit`, `death`).
-    5. `assets/sprites/boss_zeus_champion.*`: Zeus's Champion (`idle`, `move`, `attack`, `cast`, `death`).
-    6. `assets/sprites/boss_cronus.*`: Titan Cronus (`idle`, `move`, `cleave`, `summon`, `death`).
-  - **Pure-Code `.sprite` DSL Assets (`sprite-design`)**:
-    - Golden Arrow, Bronze Sword Slash Arc / Wave, Lightning Bolt, Cronus Crescent Wave, **Olympian Treasure Chest (Closed & Open)**, **Power-Up Orbs (Attack Speed, Damage, Movement Speed)**, Ambrosia XP Gem, Nectar Heart, Athena Orbiting Shield, Olympus Marble Pillar.
+  - **Shared Melee vs. Ranged Attacking Animation Architecture**:
+    Every combat unit (`hero_greek`, `mob_skeleton`, `mob_skeleton_archer`, `mob_warrior_unshielded`, `mob_warrior_shielded`, `boss_zeus_champion`, `boss_cronus`) implements **both** standardized `melee_attack` and `ranged_attack` tags (alongside weapon/role aliases `sword_attack`, `bow_attack`, `attack`, `cleave`, `cast`, `summon`) with unified 4-frame (`75ms–85ms`, `loop=once`) motion choreography:
+    1. **Shared Melee Attack Profile (`melee_attack` / `sword_attack` / `cleave`)**:
+       - **Frame 0 (Anticipation / Wind-Up)**: Torso leans back (`dx=-2..-3`, `rot=-6`), right arm cocks behind shoulder (`rot=-40`), melee blade/spear/sickle raises to `-55°`.
+       - **Frames 1–2 (Forward Lunge & Cleave Sweep)**: Torso lunges forward (`dx=0->4..6`, `rot=10..12`, `squash=-0.08`, `ease=out_quad`), arm swings through `-20° -> +55°`, weapon sweeps `-20° -> +75°` at `scale=1.18`, and the unit's `slash_arc` crescent visual effect flashes (`visible=true` on `f=1..2`, `dx=0->3..4`, `rot=-15->25`).
+       - **Frame 3 (Follow-Through & Recovery)**: Weapon and torso settle back to `0°`.
+    2. **Shared Ranged Attack Profile (`ranged_attack` / `bow_attack` / `cast` / `summon`)**:
+       - **Frames 0–1 (Draw / Aim Tension)**: Torso braces back (`dx=0->-3..-4`, `rot=0->-6`, `squash=0.0->0.06`), draw arm pulls back (`dx=0->-4..-5`, `rot=0->-22`), and ranged bow/javelin/spear/focus extends with tension (`scale=1.10..1.12`, `squash=0.0->0.08`).
+       - **Frame 2 (Release Snap & Muzzle Flash)**: Torso snaps forward (`dx=2..3->0`, `rot=5->0`, `squash=-0.08->0.0`, `ease=out_quad`), arm releases (`dx=3..4->0`), and the unit's `range_flash` starburst flashes at the release point (`visible=true` on `f=2..2`, `scale=1.20..1.25`).
+       - **Frame 3 (Recoil Settle)**: Smooth return to combat stance.
+  - **Character, Mob & Boss Sprite Bundles (`assets/sprites/*.{sprite,png,json,aseprite}`)**:
+    1. `assets/sprites/hero_greek.*` (`64x64`, 30 frames): Greek Hero (`idle`, `run`, `ranged_attack`, `bow_attack`, `melee_attack`, `sword_attack`, `hit`, `death`).
+    2. `assets/sprites/mob_skeleton.*` (`64x64`, 26 frames): Melee Skeleton Spartoi (`idle`, `run`, `attack`, `melee_attack`, `ranged_attack`, `hit`, `death`).
+    3. `assets/sprites/mob_skeleton_archer.*` (`64x64`, 26 frames): Ranged Skeleton Spartoi Archer (`idle`, `run`, `attack`, `ranged_attack`, `melee_attack`, `hit`, `death`).
+    4. `assets/sprites/mob_warrior_unshielded.*` (`64x64`, 26 frames): Greek Hoplite Warrior Unshielded (`idle`, `run`, `attack`, `melee_attack`, `ranged_attack`, `hit`, `death`).
+    5. `assets/sprites/mob_warrior_shielded.*` (`64x64`, 30 frames): Greek Hoplite Warrior Shielded (`idle`, `run`, `shield_guard`, `attack`, `melee_attack`, `ranged_attack`, `hit`, `death`).
+    6. `assets/sprites/boss_zeus_champion.*` (`96x96`, 34 frames): Zeus's Champion (`idle`, `move`, `run`, `attack`, `melee_attack`, `cast`, `ranged_attack`, `hit`, `death`).
+    7. `assets/sprites/boss_cronus.*` (`112x112`, 38 frames): Titan Cronus (`idle`, `move`, `run`, `cleave`, `melee_attack`, `attack`, `summon`, `ranged_attack`, `hit`, `death`).
+  - **Arena Background & Procedural Props/Projectiles (`assets/sprites/*.{sprite,png,json,aseprite}`)**:
+    - `assets/images/olympus_bg.png`: `1280x720` top-down Mount Olympus marble courtyard.
+    - `assets/sprites/proj_arrow.*` (`32x32`, `fly`): Ranged Golden/Stygian Arrow projectile.
+    - `assets/sprites/fx_slash_wave.*` (`48x48`, `slash`): Melee Crescent Slash Wave projectile/arc.
+    - `assets/sprites/prop_chest.*` (`48x48`, `closed`, `open`): Olympian Treasure Chest.
+    - `assets/sprites/powerup_relic.*` (`36x36`, `pulse`): Divine Stat Power-Up Orb.
+    - `assets/sprites/pickup_xp.*` (`24x24`, `float`): Ambrosia XP Gem.
+    - `assets/sprites/prop_pillar.*` (`64x64`, `intact`, `cracked`): Olympus Marble Pillar.
 
 ---
 

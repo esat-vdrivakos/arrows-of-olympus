@@ -1,0 +1,4 @@
+title "Divine Power-Up Relic Pickup"
+type sfx
+inst fanfare preset=powerup_fanfare vol=0.32
+track main fanfare: D5:65ms F#5:65ms A5:65ms D6:190ms

@@ -50,6 +50,20 @@ part kopis ramp=steel z=6 pivot=46,36
   capsule 52,26 57,20 r=2.5
   box 45,37 3.0,1.5 ramp=rust_bronze
 
+part bone_bow ramp=cursed_bone z=6 hidden=true pivot=47,33
+  capsule 45,20 51,33 r=1.8
+  capsule 51,33 45,46 r=1.8
+  line 44,21 44,45 thick=1.1 ramp=necromancy
+  line 42,33 54,33 thick=1.8 ramp=necromancy
+
+part slash_arc ramp=necromancy z=9 hidden=true pivot=48,32
+  poly 48,14 59,24 61,36 52,48 54,34 46,22 r=1.5
+  poly 52,18 60,28 56,42 54,30 r=1.0 ramp=cursed_bone
+
+part range_flash ramp=necromancy z=9 hidden=true pivot=54,33
+  poly 54,25 57,31 61,33 57,35 54,41 52,35 48,33 52,31
+  circle 54,33 r=2.2 ramp=cursed_bone
+
 tag idle frames=4 duration=120ms loop=pingpong
   pose ribs dy=sin(1.2)
   pose skull dy=sin(1.5) rot=sin(3.0)
@@ -65,12 +79,45 @@ tag run frames=4 duration=85ms loop=loop
   pose arm_r rot=sin(18.0)
   pose kopis rot=sin(20.0) dy=sin(2.0)
 
-tag attack frames=4 duration=80ms loop=once
-  pose arm_r f=0..1 rot=0->-40
-  pose arm_r f=2..3 rot=55->0 ease=out_quad
-  pose kopis f=0..1 rot=0->-45
-  pose kopis f=2..3 rot=65->0 scale=1.15 ease=out_quad
-  pose ribs f=1..2 dx=0->3
+// Shared Melee Attack Profile (Wind-up Back-lean -> Forward Lunge + Wide Cleave Arc -> Recovery)
+tag attack frames=4 duration=75ms loop=once
+  pose kopis visible=true f=0..0 rot=-55 dx=-2 dy=-4
+  pose kopis visible=true f=1..2 rot=-20->75 dx=4 dy=2 scale=1.18 ease=out_quad
+  pose kopis visible=true f=3..3 rot=40->0 dx=0 dy=0
+  pose bone_bow visible=false f=0..3
+  pose slash_arc visible=true f=1..2 dx=0->3 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-2
+  pose arm_r f=1..2 rot=-20->55 dx=3 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose ribs f=0..0 dx=-2 rot=-6
+  pose ribs f=1..2 dx=0->4 rot=10 squash=-0.08 ease=out_quad
+  pose ribs f=3..3 dx=2->0 rot=4->0
+
+tag melee_attack frames=4 duration=75ms loop=once
+  pose kopis visible=true f=0..0 rot=-55 dx=-2 dy=-4
+  pose kopis visible=true f=1..2 rot=-20->75 dx=4 dy=2 scale=1.18 ease=out_quad
+  pose kopis visible=true f=3..3 rot=40->0 dx=0 dy=0
+  pose bone_bow visible=false f=0..3
+  pose slash_arc visible=true f=1..2 dx=0->3 rot=-15->25 scale=1.12 squash=0.0->0.10 ease=out_quad
+  pose arm_r f=0..0 rot=-40 dx=-2
+  pose arm_r f=1..2 rot=-20->55 dx=3 ease=out_quad
+  pose arm_r f=3..3 rot=15->0
+  pose ribs f=0..0 dx=-2 rot=-6
+  pose ribs f=1..2 dx=0->4 rot=10 squash=-0.08 ease=out_quad
+  pose ribs f=3..3 dx=2->0 rot=4->0
+
+// Shared Ranged Attack Profile (Draw/Aim Tension -> Release Snap + Flash -> Recoil Recovery)
+tag ranged_attack frames=4 duration=75ms loop=once
+  pose kopis visible=false f=0..3
+  pose bone_bow visible=true f=0..1 dx=0->2 scale=1.10 squash=0.0->0.08
+  pose bone_bow visible=true f=2..3 dx=3->0 scale=1.02 squash=-0.06->0.0 ease=out_quad
+  pose arm_r f=0..1 dx=0->-4 rot=0->-22
+  pose arm_r f=2..3 dx=3->0 rot=12->0 ease=out_quad
+  pose ribs f=0..1 dx=0->-3 rot=0->-6 squash=0.0->0.06
+  pose ribs f=2..3 dx=2->0 rot=5->0 squash=-0.08->0.0 ease=out_quad
+  pose skull f=0..1 dx=0->-2
+  pose skull f=2..3 dx=2->0
+  pose range_flash visible=true f=2..2 dx=2 scale=1.2
 
 tag hit frames=2 duration=90ms loop=once
   pose ribs dx=-4->0 squash=-0.15->0.0

@@ -1,0 +1,4 @@
+title "Greek Hero Hurt"
+type sfx
+inst hurt preset=hit_damage vol=0.36
+track main hurt: 250Hz->65Hz:160ms

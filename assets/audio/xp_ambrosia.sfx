@@ -1,0 +1,4 @@
+title "Ambrosia XP Gem Pickup"
+type sfx
+inst coin preset=coin_pickup vol=0.24
+track main coin: A5:45ms E6:95ms

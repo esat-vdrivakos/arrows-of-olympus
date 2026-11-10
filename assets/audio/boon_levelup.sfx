@@ -1,0 +1,6 @@
+title "Olympian Boon Blessing Selected"
+type sfx
+inst blessing preset=gem_shimmer vol=0.30
+inst chord    preset=powerup_fanfare vol=0.22
+track lead blessing: D5:80ms A5:80ms D6:240ms
+track harm chord:    [D4 A4 D5]:400ms

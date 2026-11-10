@@ -1,0 +1,4 @@
+title "Arrow & Blade Impact"
+type sfx
+inst thud preset=hit_punch vol=0.35
+track main thud: 220Hz->55Hz:110ms

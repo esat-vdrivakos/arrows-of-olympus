@@ -1,0 +1,4 @@
+title "Hoplite Bronze Aspis Shield Deflect"
+type sfx
+inst clang preset=shield_deflect vol=0.34
+track main clang: 960Hz->480Hz:160ms
